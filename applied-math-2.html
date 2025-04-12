@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Mathematics 2 - LESS TIME TUTION</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: var(--secondary-color) !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .course-content {
+            padding-top: 80px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .card {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            margin-bottom: 25px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-title {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .list-group-item {
+            border: none;
+            border-left: 4px solid transparent;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            transition: var(--transition);
+        }
+        
+        .list-group-item:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left-color: var(--primary-color);
+        }
+        
+        .active-topic {
+            background: rgba(52, 152, 219, 0.15) !important;
+            border-left: 4px solid var(--primary-color) !important;
+            font-weight: 500;
+        }
+        
+        .video-container {
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .nav-buttons {
+            margin: 25px 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        .progress-bar {
+            background-color: var(--primary-color);
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+            background-color: white;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0,0,0,0.125);
+        }
+        
+        .text-muted {
+            color: #6c757d !important;
+        }
+        
+        .fa-youtube {
+            color: #ff0000;
+        }
+        
+        @media (max-width: 992px) {
+            .course-content {
+                padding-top: 70px;
+            }
+        }
+
+        .rounded-1inch {
+        border-radius: 1in !important;
+        width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-clock me-2"></i>LESS TIME TUTION
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notes.html">Notes</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-calculator me-1"></i>Applied Mathematics
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="applied-math-1.html">Applied Mathematics 1</a></li>
+                            <li><a class="dropdown-item" href="applied-math-2.html">Applied Mathematics 2</a></li>
+                            <li><a class="dropdown-item" href="applied-math-3.html">Applied Mathematics 3</a></li>
+                            <li><a class="dropdown-item" href="applied-math-4.html">Applied Mathematics 4</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>Account
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="course-content py-5">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <h1 class="mb-0 me-3">Applied Mathematics 2</h1>
+                <span class="badge bg-primary">Latest</span>
+            </div>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>Complete all lectures sequentially for best learning experience.
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-primary" id="prevBtn" disabled>
+                    <i class="fas fa-arrow-left me-2"></i>Previous Topic
+                </button>
+                <button class="btn btn-primary" id="nextBtn">
+                    Next Topic<i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Video Container -->
+                    <div class="video-container card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h2 class="card-title mb-0">Current Lecture</h2>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-play me-1"></i>Playing
+                                </span>
+                            </div>
+                            <div class="ratio ratio-16x9">
+                                <iframe id="lectureVideo" allowfullscreen></iframe>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-clock me-1"></i>Duration: 10 mins
+                                </small>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="fas fa-bookmark me-1"></i>Bookmark
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topics List -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2 class="card-title mb-0">Course Topics</h2>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-list-ol me-1"></i>32 Lectures
+                                </span>
+                            </div>
+                            
+                            <div class="accordion" id="courseModules">
+                                <!-- Module 1: ODE -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="module1Header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#module1Content">
+                                            <i class="fas fa-matrix me-2"></i>Module 1: Matrices and Determinants
+                                        </button>
+                                    </h2>
+                                    <div id="module1Content" class="accordion-collapse collapse show" data-bs-parent="#courseModules">
+                                        <div class="accordion-body">
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item list-group-item-action active-topic" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/I4I92dqocB0?si=9Il_zAyWQTSeSerd">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.1 Differential Equation First Order and Degree, Variable Separable</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-clock me-1"></i>17 mins
+                                                        <span class="ms-3"><i class="fas fa-check-circle text-success me-1"></i>Completed</span>
+                                                    </small>
+                                                </a>
+
+                                                <!-- Rest of the module 1 content remains exactly the same -->
+                                                <!-- I'm keeping all your existing list items exactly as they were -->
+                                                <!-- Just with the enhanced styling from the CSS -->
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/JahHd_lOWY4?si=jCU1nnk0SWDUCktC">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.2 Exact Differential Equation</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 3 mins</small>
+                                                </a>
+                                                
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/WaZQQi1YhF0?si=P95z7xkqxejLPIp8">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.3 Exact Differential Equation | Question1</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 7 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/IwDEzmgBcqw?si=MgL2YPYA9OJZgp6B">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.4 Exact Differential Equation | Question2</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 8 mins</small>
+                                                </a>
+                                                
+                                                
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/DDCmSF7hynQ?si=0mUo4p4M42XrwYVC">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.5 Exact Differential Equation | Question3</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 3 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/vFsWE4VKwUI?si=Phf--XoEv-FpChzr">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.6 Non-Exact Differential Equation | homogeneous #type1</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 2 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/fR3Ze9mGMh0?si=sztQ8axOQUL-X_Gn">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.7 Non-Exact Differential Equation | homogeneous #Type1</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 11 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.8 Non-Exact Differential Equation #type2</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 2 mins</small>
+                                                </a>
+
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.9 Non-Exact Differential Equation #type2</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 12 mins</small>
+                                                </a>
+
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">1.10 Non-Exact Differential Equation #type3</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 2 mins</small>
+                                                </a>
+                                                <!-- All other list items remain exactly the same -->
+                                                <!-- ... -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Module 2: Laplace Transform -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="module2Header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module2Content">
+                                            <i class="fas fa-chart-line me-2"></i>Module 2: Laplace Transform
+                                        </button>
+                                    </h2>
+                                    <div id="module2Content" class="accordion-collapse collapse" data-bs-parent="#courseModules">
+                                        <div class="accordion-body">
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/vXdZxQ0Y3YQ?si=j0G1XNY96XcPumVl">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.1 Laplace Transform</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 6 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/4fgoIIj5ta0?si=lE3Kx72evFRi42Mt">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.2 Laplace Transform | First Shift Property</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 4 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/WmnzZX06DGk?si=tuU_ZW9CwayGu8MU">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.3 Laplace Transform | Practice Question</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 6 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/hvtl1c-9pR0?si=ZY1sPZ3aoDtqGPg_">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.4  Laplace Transform | Practice Numerical</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 4 mins</small>
+                                                </a>
+                                                
+                                                
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/Y0mBsCv1Ky8?si=Sphxtchn_IsslbDG">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.5 Laplace Transform | Practice Numerical</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 6 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/U5ggJ7k_Xq4?si=MPM60lYBtlPejX6L">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.6 Laplace Transform | Change Of Scale Property And Questions</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 6 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/UKAq8CreLEE?si=L0hDMBxKPcJ2TJlu">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.7 Laplace Transform | Multiplication Property And Numerical</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 4 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/ETRZkerDPKI?si=vdyyf4hC97wh-flO">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.8 Laplace Transform | Multiplication Property With Mix Questions</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 8 mins</small>
+                                                </a>
+
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/ETRZkerDPKI?si=IXM85Bg-VXI7JsaH">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">2.9 Laplace Transform | Mix Questions </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 6 mins</small>
+                                                </a>
+                                                <!-- Rest of module 2 content remains the same -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Module 3:  -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="module3Header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module3Content">
+                                            <i class="fas fa-integral me-2"></i>Module 3: Function Of Complex Variables
+                                        </button>
+                                    </h2>
+                                    <div id="module3Content" class="accordion-collapse collapse" data-bs-parent="#courseModules">
+                                        <div class="accordion-body">
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/u2anw7K7zng?si=ETp3yObW96q1Jp7k">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.1 Introduction Of Complex Numbers | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 12 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/r8Kk5XDGNW4?si=9VcNkRqZIVc5q9fA">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.2 Introduction Of Complex Numbers | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 20 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/0nluZ0c1C7s?si=dAGqqmzLYxeRj4iS">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.3 Complex Numbers Questons | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 12 mins</small>
+                                                </a>
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/BjjJSeAasWg?si=TdN34R2hzQLyErGF">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.4 Complex Numbers Questons (p-2) | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 12 mins</small>
+                                                </a>
+                                                
+                                                
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/Bod60Vi7dcU?si=mF9u7slB1zoI8Dly">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.5 Square Root Of Complex Numbers | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 10 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/_v3Ll7-rBas?si=kyE0ENbbTZhK7EE9">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.6 Modulus & Argument Of Complex Numbers | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 11 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/n7gAnguxqh0?si=rsOAr0f63na7yN1O">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.7 Modulus & Argument (Questions) | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 11 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/3wGFrUc86Jc?si=pxwXkE79QNUYpsLx">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.8 Exponential Form of Complex Number | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 13 mins</small>
+                                                </a>
+
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/uE55Df3Bc18?si=m6kvGJLIyLxcj3eT">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.9 Exponential Form of Complex Number (p-2) | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 24 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/qgmDjEgz79s?si=YaXkd54r2Gi-P4FB">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">3.10 De-Moivre's Theorem | Functions of Complex Variables</h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 18 mins</small>
+                                                </a>
+                                                <!-- Rest of module 3 content remains the same -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Module 4: Vector Calculus -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="module4Header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module4Content">
+                                            <i class="fas fa-vector-square me-2"></i>Module 4: Complex Integral
+                                        </button>
+                                    </h2>
+                                    <div id="module4Content" class="accordion-collapse collapse" data-bs-parent="#courseModules">
+                                        <div class="accordion-body">
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/AMRi4Nl9wYA?si=Bt2X4gcy2ioguMpY">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.1 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 8 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/_ZUiDHfdU4w?si=AS8lqKaHYBrGttDs">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.2 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 3 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/oGVvc4FDxC0?si=E4aOOA0fFvbgOkr6">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.3 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 11 mins</small>
+                                                </a>
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/o5C7R82ueQY?si=aZ3AVwngOKwMJSZP">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.4 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 7 mins</small>
+                                                </a>
+                                                
+                                                
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/HxUmxtGajgo?si=f6x1OarCRpMmW1ek">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.5 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 12 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/ioOdKEQzgvQ?si=xw3U9hfGCBhKACA1">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.6 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 5 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/dh6GShJTt14?si=J6m0m49DpQMiKsQ7">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.7 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 11 mins</small>
+                                                </a>
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/xU52-69w-KU?si=L8F7K5ABtOanuOka">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.8 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 15 mins</small>
+                                                </a>
+
+
+
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/JBog2lX5I1Y?si=yMV6K3fYbW4FGytc">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.9 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 13 mins</small>
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action" 
+                                                   data-video="https://www.youtube-nocookie.com/embed/xvRQFbAua-4?si=dtMl5WXeizo5FYlo">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h6 class="mb-1">4.10 </h6>
+                                                        <small class="text-muted"><i class="fab fa-youtube"></i></small>
+                                                    </div>
+                                                    <small class="text-muted">Duration: 9 mins</small>
+                                                </a>
+
+                                                <!-- Rest of module 4 content remains the same -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Resources -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <h3 class="card-title mb-0 me-2">Course Resources</h3>
+                                <i class="fas fa-file-alt text-primary"></i>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="#" class="text-decoration-none text-dark">
+                                        <i class="fas fa-file-pdf me-2 text-danger"></i>Course Notes
+                                    </a>
+                                    <span class="badge bg-primary rounded-pill">PDF</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="#" class="text-decoration-none text-dark">
+                                        <i class="fas fa-book me-2 text-info"></i>Reference Materials
+                                    </a>
+                                    <span class="badge bg-success rounded-pill">New</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="#" class="text-decoration-none text-dark">
+                                        <i class="fas fa-file-excel me-2 text-success"></i>Practice Problems
+                                    </a>
+                                    <span class="badge bg-warning rounded-pill">50+</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Course Progress -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <h3 class="card-title mb-0 me-2">Course Progress</h3>
+                                <i class="fas fa-chart-line text-primary"></i>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <small>Completed: 21/32</small>
+                                <small>Remaining: 11</small>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-primary">
+                                    <i class="fas fa-certificate me-2"></i>Get Full Analysis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructor Info -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <h3 class="card-title mb-0 me-2">Instructor</h3>
+                                <i class="fas fa-chalkboard-teacher text-primary"></i>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="logo.jpg" class="rounded-circle rounded-1inch me-3" alt="Instructor">                                <div>
+                                    <h6 class="mb-0">Mathematics Expert</h6>
+                                    <small class="text-muted">Applied Mathematics</small>
+                                </div>
+                            </div>
+                            <p class="small">15+ years of teaching experience with specialization in engineering mathematics and problem-solving techniques.</p>
+                            <div class="d-flex justify-content-between">
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-star text-warning me-1"></i>4.9
+                                </span>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-users me-1"></i>1.2K Students
+                                </span>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-video me-1"></i>32 Lectures
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="course-navigation.js"></script>
+</body>
+</html>
