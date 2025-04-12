@@ -776,7 +776,7 @@
             try {
                 if (!geminiModel) {
                     const { GoogleGenerativeAI } = await import("https://esm.run/@google/generative-ai");
-                    const genAI = new GoogleGenerativeAI("AIzaSyC5K-5tZyUA3XVh6ffQsbcHdI6Uh3YLX1I");
+                    const genAI = new GoogleGenerativeAI(API_KEY);
                     geminiModel = genAI.getGenerativeModel({
                         model: "gemini-1.5-flash",
                         systemInstruction: "You are an expert tutor in Applied Mathematics. Provide clear, step-by-step explanations for problems in Applied Mathematics 1-4. Format your answers with proper mathematical notation and break down solutions into logical steps.",
