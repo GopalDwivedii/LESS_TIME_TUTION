@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Planner | Exam Preparation Calendar</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #f8f9fa;
+            --accent-color: #95a5a6;
+            --highlight-color: #3498db;
+            --module1-color: #e74c3c;
+            --module2-color: #2ecc71;
+            --module3-color: #3498db;
+            --module4-color: #f39c12;
+            --revision-color: #9b59b6;
+            --exam-color: #e74c3c;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 25px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            grid-column: 1 / -1;
+            margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1, h2, h3 {
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .module-selector {
+            margin-bottom: 25px;
+        }
+        
+        .module-group {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .module-header {
+            cursor: pointer;
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .module-header:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .submodules-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+        }
+        
+        .submodules-dropdown.show {
+            max-height: 500px;
+        }
+        
+        .submodule-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .submodule-item label {
+            cursor: pointer;
+            flex-grow: 1;
+        }
+        
+        .dropdown-arrow {
+            transition: transform 0.3s;
+            font-size: 0.8em;
+            color: var(--accent-color);
+        }
+        
+        .dropdown-arrow.rotated {
+            transform: rotate(180deg);
+        }
+        
+        input[type="checkbox"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .exam-settings {
+            margin-top: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+        }
+        
+        .time-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .time-selector input {
+            width: 50%;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background-color: #34495e;
+        }
+        
+        button.secondary {
+            background-color: var(--accent-color);
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+        
+        button.secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .calendar-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .month-year {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        .calendar th {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--accent-color);
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            background-color: #f8f9fa;
+        }
+        
+        .calendar td {
+            padding: 8px;
+            border: 1px solid #eee;
+            text-align: right;
+            vertical-align: top;
+            height: 100px;
+            width: 14.28%;
+            transition: background-color 0.2s;
+        }
+        
+        .day-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .empty-day {
+            background-color: #f9f9f9;
+        }
+        
+        .module-tag {
+            font-size: 12px;
+            padding: 4px 6px;
+            border-radius: 3px;
+            margin-top: 4px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .module1 {
+            background-color: var(--module1-color);
+        }
+        
+        .module2 {
+            background-color: var(--module2-color);
+        }
+        
+        .module3 {
+            background-color: var(--module3-color);
+        }
+        
+        .module4 {
+            background-color: var(--module4-color);
+        }
+        
+        .revision {
+            background-color: var(--revision-color);
+        }
+        
+        .exam-day {
+            background-color: rgba(231, 76, 60, 0.1);
+            position: relative;
+        }
+        
+        .exam-day::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-width: 0 16px 16px 0;
+            border-style: solid;
+            border-color: transparent var(--exam-color) transparent transparent;
+        }
+        
+        .today {
+            background-color: rgba(52, 152, 219, 0.1);
+            position: relative;
+        }
+        
+        .today::after {
+            content: 'Today';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 10px;
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        
+        .legend-color {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            border-radius: 3px;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--highlight-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .progress-container {
+            width: 300px;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--highlight-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .multi-month-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) #f0f0f0;
+        }
+        
+        .multi-month-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .multi-month-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        
+        .multi-month-container::-webkit-scrollbar-thumb {
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        .month-wrapper {
+            min-width: 600px;
+            background-color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .month-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-btn {
+            background-color: #e0e0e0;
+            color: #555;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .toggle-btn:first-child {
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+        }
+        
+        .toggle-btn:last-child {
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .toggle-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .single-month-view {
+            display: block;
+        }
+        
+        .multi-month-view {
+            display: none;
+        }
+        
+        .view-toggle-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .month-wrapper {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .calendar td {
+                height: 70px;
+                font-size: 12px;
+            }
+            
+            .module-tag {
+                font-size: 10px;
+                padding: 2px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exam Planner</h1>
+        <p>Optimize your exam preparation with a personalized study schedule</p>
+    </header>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Generating your study plan...</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Module Selection</h2>
+            
+            <div class="module-selector">
+                <div class="module-group">
+                    <div class="module-header" onclick="toggleDropdown('module1-dropdown')">
+                        <span>Module 1</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="submodules-dropdown" id="module1-dropdown">
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module1-am1" name="module1-am1" checked>
+                            <label for="module1-am1">Fundamentals</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module1-am2" name="module1-am2" checked>
+                            <label for="module1-am2">Understand the Question</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module1-am3" name="module1-am3" checked>
+                            <label for="module1-am3">Formula Revision</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module1-am4" name="module1-am4" checked>
+                            <label for="module1-am4">Practice Problems</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-group">
+                    <div class="module-header" onclick="toggleDropdown('module2-dropdown')">
+                        <span>Module 2</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="submodules-dropdown" id="module2-dropdown">
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module2-am1" name="module2-am1" checked>
+                            <label for="module2-am1">Fundamentals</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module2-am2" name="module2-am2" checked>
+                            <label for="module2-am2">Understand the Question</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module2-am3" name="module2-am3" checked>
+                            <label for="module2-am3">Formula Revision</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module2-am4" name="module2-am4" checked>
+                            <label for="module2-am4">Practice Problems</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-group">
+                    <div class="module-header" onclick="toggleDropdown('module3-dropdown')">
+                        <span>Module 3</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="submodules-dropdown" id="module3-dropdown">
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module3-am1" name="module3-am1" checked>
+                            <label for="module3-am1">Fundamentals</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module3-am2" name="module3-am2" checked>
+                            <label for="module3-am2">Understand the Question</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module3-am3" name="module3-am3" checked>
+                            <label for="module3-am3">Formula Revision</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module3-am4" name="module3-am4" checked>
+                            <label for="module3-am4">Practice Problems</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-group">
+                    <div class="module-header" onclick="toggleDropdown('module4-dropdown')">
+                        <span>Module 4</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="submodules-dropdown" id="module4-dropdown">
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module4-am1" name="module4-am1" checked>
+                            <label for="module4-am1">Fundamentals</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module4-am2" name="module4-am2" checked>
+                            <label for="module4-am2">Understand the Question</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module4-am3" name="module4-am3" checked>
+                            <label for="module4-am3">Formula Revision</label>
+                        </div>
+                        <div class="submodule-item">
+                            <input type="checkbox" id="module4-am4" name="module4-am4" checked>
+                            <label for="module4-am4">Practice Problems</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exam-settings">
+                <h2>Study Configuration</h2>
+                
+                <div class="form-group">
+                    <label for="exam-date">Exam Date:</label>
+                    <input type="date" id="exam-date" name="exam-date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exam-time">Exam Time:</label>
+                    <div class="time-selector">
+                        <input type="number" id="exam-hour" name="exam-hour" min="0" max="23" placeholder="Hour">
+                        <input type="number" id="exam-minute" name="exam-minute" min="0" max="59" placeholder="Min">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="module1-duration">Module 1 Duration (hours):</label>
+                    <input type="number" id="module1-duration" name="module1-duration" min="1" value="12">
+                </div>
+                
+                <div class="form-group">
+                    <label for="module2-duration">Module 2 Duration (hours):</label>
+                    <input type="number" id="module2-duration" name="module2-duration" min="1" value="15">
+                </div>
+                
+                <div class="form-group">
+                    <label for="module3-duration">Module 3 Duration (hours):</label>
+                    <input type="number" id="module3-duration" name="module3-duration" min="1" value="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="module4-duration">Module 4 Duration (hours):</label>
+                    <input type="number" id="module4-duration" name="module4-duration" min="1" value="8">
+                </div>
+                
+                <div class="form-group">
+                    <label for="study-hours-per-day">Study Hours Per Day:</label>
+                    <input type="number" id="study-hours-per-day" name="study-hours-per-day" min="1" max="24" value="4">
+                </div>
+                
+                <button id="generate-plan">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    Generate Study Plan
+                </button>
+            </div>
+        </div>
+        
+        <div class="calendar-container">
+            <div class="view-toggle-container">
+                <div class="view-toggle">
+                    <button class="toggle-btn active" id="single-view-btn">Single Month</button>
+                    <button class="toggle-btn" id="multi-view-btn">Multi-Month</button>
+                </div>
+            </div>
+            
+            <div class="single-month-view" id="singleMonthView">
+                <div class="calendar-header">
+                    <div class="calendar-controls">
+                        <button id="prev-month" class="secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                            Prev
+                        </button>
+                        <button id="next-month" class="secondary">
+                            Next
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="month-year" id="month-year">March 2025</div>
+                </div>
+                
+                <table class="calendar" id="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="multi-month-view" id="multiMonthView">
+                <div class="multi-month-container" id="multiMonthContainer">
+                    <!-- Multi-month view will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color module1"></div>
+                    <div>Module 1</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color module2"></div>
+                    <div>Module 2</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color module3"></div>
+                    <div>Module 3</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color module4"></div>
+                    <div>Module 4</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color revision"></div>
+                    <div>Revision</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--exam-color);"></div>
+                    <div>Exam Day</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let studyPlan = [];
+        let allMonthsData = {};
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default exam date to 30 days from today
+            const today = new Date();
+            const defaultExamDate = new Date(today);
+            defaultExamDate.setDate(defaultExamDate.getDate() + 30);
+            
+            document.getElementById('exam-date').valueAsDate = defaultExamDate;
+            document.getElementById('exam-hour').value = 9;
+            document.getElementById('exam-minute').value = 0;
+            
+            // Initial calendar render
+            renderCalendar(currentMonth, currentYear);
+            
+            // Event listeners for calendar navigation
+            document.getElementById('prev-month').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar(currentMonth, currentYear);
+                updateCalendarWithStudyPlan(studyPlan);
+            });
+            
+            document.getElementById('next-month').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar(currentMonth, currentYear);
+                updateCalendarWithStudyPlan(studyPlan);
+            });
+            
+            // Generate study plan
+            document.getElementById('generate-plan').addEventListener('click', generateStudyPlan);
+            
+            // View toggle buttons
+            document.getElementById('single-view-btn').addEventListener('click', function() {
+                document.getElementById('single-view-btn').classList.add('active');
+                document.getElementById('multi-view-btn').classList.remove('active');
+                document.getElementById('singleMonthView').style.display = 'block';
+                document.getElementById('multiMonthView').style.display = 'none';
+            });
+            
+            document.getElementById('multi-view-btn').addEventListener('click', function() {
+                document.getElementById('multi-view-btn').classList.add('active');
+                document.getElementById('single-view-btn').classList.remove('active');
+                document.getElementById('singleMonthView').style.display = 'none';
+                document.getElementById('multiMonthView').style.display = 'block';
+                renderMultiMonthView();
+            });
+            
+            // Initialize dropdowns
+            initializeDropdowns();
+        });
+        
+        function initializeDropdowns() {
+            // Open all dropdowns by default
+            toggleDropdown('module1-dropdown');
+            toggleDropdown('module2-dropdown');
+            toggleDropdown('module3-dropdown');
+            toggleDropdown('module4-dropdown');
+        }
+        
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const arrow = dropdown.previousElementSibling.querySelector('.dropdown-arrow');
+            dropdown.classList.toggle('show');
+            arrow.classList.toggle('rotated');
+        }
+        
+        // Function to render calendar
+        function renderCalendar(month, year) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                               "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('month-year').textContent = `${monthNames[month]} ${year}`;
+            
+            let calendarBody = document.getElementById('calendar-body');
+            calendarBody.innerHTML = '';
+            
+            let date = 1;
+            for (let i = 0; i < 6; i++) {
+                // Create a table row
+                let row = document.createElement('tr');
+                
+                // Creating individual cells
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        // Empty cells before the first day of the month
+                        let cell = document.createElement('td');
+                        cell.classList.add('empty-day');
+                        row.appendChild(cell);
+                    } else if (date > daysInMonth) {
+                        // Break if we've reached the end of the month
+                        break;
+                    } else {
+                        // Create date cell
+                        let cell = document.createElement('td');
+                        cell.dataset.date = `${year}-${month+1}-${date}`;
+                        
+                        // Check if it's today
+                        let currentDate = new Date();
+                        if (date === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
+                            cell.classList.add('today');
+                        }
+                        
+                        // Add day number
+                        let dayDiv = document.createElement('div');
+                        dayDiv.classList.add('day-number');
+                        dayDiv.textContent = date;
+                        cell.appendChild(dayDiv);
+                        
+                        // Add cell to row
+                        row.appendChild(cell);
+                        date++;
+                    }
+                }
+                
+                // Add row to calendar if it has cells
+                if (row.hasChildNodes()) {
+                    calendarBody.appendChild(row);
+                }
+            }
+        }
+        
+        // Function to show loading overlay
+        function showLoadingOverlay() {
+            const overlay = document.getElementById('loadingOverlay');
+            const progressBar = document.getElementById('progressBar');
+            
+            overlay.style.display = 'flex';
+            progressBar.style.width = '0%';
+            
+            // Simulate progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 90) {
+                    clearInterval(interval);
+                }
+                progressBar.style.width = `${progress}%`;
+            }, 200);
+        }
+        
+        // Function to hide loading overlay
+        function hideLoadingOverlay() {
+            const overlay = document.getElementById('loadingOverlay');
+            const progressBar = document.getElementById('progressBar');
+            
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
+        }
+        
+        // Function to generate study plan
+        async function generateStudyPlan() {
+            showLoadingOverlay();
+            
+            // Use setTimeout to allow UI to update before heavy computation
+            setTimeout(() => {
+                // Get exam date and time
+                const examDateStr = document.getElementById('exam-date').value;
+                if (!examDateStr) {
+                    alert('Please select an exam date');
+                    hideLoadingOverlay();
+                    return;
+                }
+                
+                const examHour = parseInt(document.getElementById('exam-hour').value) || 9;
+                const examMinute = parseInt(document.getElementById('exam-minute').value) || 0;
+                
+                const examDate = new Date(examDateStr);
+                examDate.setHours(examHour, examMinute, 0);
+                
+                // Get module durations (in hours)
+                const module1Duration = parseFloat(document.getElementById('module1-duration').value) || 12;
+                const module2Duration = parseFloat(document.getElementById('module2-duration').value) || 15;
+                const module3Duration = parseFloat(document.getElementById('module3-duration').value) || 10;
+                const module4Duration = parseFloat(document.getElementById('module4-duration').value) || 8;
+                
+                // Get study hours per day
+                const studyHoursPerDay = parseFloat(document.getElementById('study-hours-per-day').value) || 4;
+                
+                // Calculate total study hours needed
+                const totalStudyHours = module1Duration + module2Duration + module3Duration + module4Duration;
+                
+                // Calculate number of days needed for each module
+                let module1Days = Math.ceil(module1Duration / studyHoursPerDay);
+                let module2Days = Math.ceil(module2Duration / studyHoursPerDay);
+                let module3Days = Math.ceil(module3Duration / studyHoursPerDay);
+                let module4Days = Math.ceil(module4Duration / studyHoursPerDay);
+                
+                // Calculate total days needed for studying
+                let totalDaysNeeded = module1Days + module2Days + module3Days + module4Days;
+                
+                // Calculate days available until exam
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                let daysUntilExam = Math.floor((examDate - today) / (1000 * 60 * 60 * 24));
+                
+                // Check if we have enough time or need to adjust
+                let revisionDays = 0;
+                let scaleFactor = 1;
+                
+                if (daysUntilExam > totalDaysNeeded) {
+                    // We have extra days, allocate for revision
+                    revisionDays = daysUntilExam - totalDaysNeeded;
+                } else if (daysUntilExam < totalDaysNeeded) {
+                    // Not enough time, scale down the days proportionally
+                    scaleFactor = daysUntilExam / totalDaysNeeded;
+                    
+                    module1Days = Math.max(1, Math.floor(module1Days * scaleFactor));
+                    module2Days = Math.max(1, Math.floor(module2Days * scaleFactor));
+                    module3Days = Math.max(1, Math.floor(module3Days * scaleFactor));
+                    module4Days = Math.max(1, Math.floor(module4Days * scaleFactor));
+                    
+                    // Recalculate total after adjustments
+                    totalDaysNeeded = module1Days + module2Days + module3Days + module4Days;
+                    
+                    // Allocate any remaining days
+                    let remainingDays = daysUntilExam - totalDaysNeeded;
+                    while (remainingDays > 0) {
+                        // Priority to longer modules
+                        if (module1Duration > module2Duration && module1Duration > module3Duration && module1Duration > module4Duration) {
+                            module1Days++;
+                        } else if (module2Duration > module3Duration && module2Duration > module4Duration) {
+                            module2Days++;
+                        } else if (module3Duration > module4Duration) {
+                            module3Days++;
+                        } else {
+                            module4Days++;
+                        }
+                        remainingDays--;
+                    }
+                }
+                
+                // Create a study plan
+                studyPlan = [];
+                allMonthsData = {};
+                
+                let currentDate = new Date(today);
+                
+                // Module 1
+                for (let i = 0; i < module1Days; i++) {
+                    studyPlan.push({
+                        date: new Date(currentDate),
+                        module: 'module1'
+                    });
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                
+                // Module 2
+                for (let i = 0; i < module2Days; i++) {
+                    studyPlan.push({
+                        date: new Date(currentDate),
+                        module: 'module2'
+                    });
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                
+                // Module 3
+                for (let i = 0; i < module3Days; i++) {
+                    studyPlan.push({
+                        date: new Date(currentDate),
+                        module: 'module3'
+                    });
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                
+                // Module 4
+                for (let i = 0; i < module4Days; i++) {
+                    studyPlan.push({
+                        date: new Date(currentDate),
+                        module: 'module4'
+                    });
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                
+                // Revision days
+                for (let i = 0; i < revisionDays; i++) {
+                    studyPlan.push({
+                        date: new Date(currentDate),
+                        module: 'revision'
+                    });
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                
+                // Exam day
+                studyPlan.push({
+                    date: new Date(examDate),
+                    module: 'exam'
+                });
+                
+                // Organize study plan by months for multi-month view
+                organizeStudyPlanByMonths();
+                
+                // Update the calendar with the study plan
+                updateCalendarWithStudyPlan(studyPlan);
+                
+                // Hide loading overlay
+                hideLoadingOverlay();
+                
+                // Show multi-month view if plan spans multiple months
+                if (Object.keys(allMonthsData).length > 1) {
+                    document.getElementById('multi-view-btn').click();
+                }
+            }, 100);
+        }
+        
+        // Function to organize study plan by months for multi-month view
+        function organizeStudyPlanByMonths() {
+            allMonthsData = {};
+            
+            studyPlan.forEach(day => {
+                const monthYearKey = `${day.date.getFullYear()}-${day.date.getMonth()}`;
+                
+                if (!allMonthsData[monthYearKey]) {
+                    allMonthsData[monthYearKey] = {
+                        month: day.date.getMonth(),
+                        year: day.date.getFullYear(),
+                        days: []
+                    };
+                }
+                
+                allMonthsData[monthYearKey].days.push(day);
+            });
+        }
+        
+        // Function to render multi-month view
+        function renderMultiMonthView() {
+            const container = document.getElementById('multiMonthContainer');
+            container.innerHTML = '';
+            
+            // Sort months chronologically
+            const sortedMonths = Object.values(allMonthsData).sort((a, b) => {
+                if (a.year !== b.year) return a.year - b.year;
+                return a.month - b.month;
+            });
+            
+            sortedMonths.forEach(monthData => {
+                const monthWrapper = document.createElement('div');
+                monthWrapper.className = 'month-wrapper';
+                
+                const monthTitle = document.createElement('div');
+                monthTitle.className = 'month-title';
+                
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                   "July", "August", "September", "October", "November", "December"];
+                monthTitle.textContent = `${monthNames[monthData.month]} ${monthData.year}`;
+                
+                const calendar = document.createElement('table');
+                calendar.className = 'calendar';
+                
+                // Create header
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
+                    const th = document.createElement('th');
+                    th.textContent = day;
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+                calendar.appendChild(thead);
+                
+                // Create body
+                const tbody = document.createElement('tbody');
+                
+                const firstDay = new Date(monthData.year, monthData.month, 1).getDay();
+                const daysInMonth = new Date(monthData.year, monthData.month + 1, 0).getDate();
+                
+                let date = 1;
+                for (let i = 0; i < 6; i++) {
+                    const row = document.createElement('tr');
+                    
+                    for (let j = 0; j < 7; j++) {
+                        if (i === 0 && j < firstDay) {
+                            const cell = document.createElement('td');
+                            cell.classList.add('empty-day');
+                            row.appendChild(cell);
+                        } else if (date > daysInMonth) {
+                            break;
+                        } else {
+                            const cell = document.createElement('td');
+                            cell.dataset.date = `${monthData.year}-${monthData.month+1}-${date}`;
+                            
+                            // Check if it's today
+                            const currentDate = new Date();
+                            if (date === currentDate.getDate() && monthData.month === currentDate.getMonth() && monthData.year === currentDate.getFullYear()) {
+                                cell.classList.add('today');
+                            }
+                            
+                            // Add day number
+                            const dayDiv = document.createElement('div');
+                            dayDiv.classList.add('day-number');
+                            dayDiv.textContent = date;
+                            cell.appendChild(dayDiv);
+                            
+                            row.appendChild(cell);
+                            date++;
+                        }
+                    }
+                    
+                    if (row.hasChildNodes()) {
+                        tbody.appendChild(row);
+                    }
+                }
+                
+                calendar.appendChild(tbody);
+                
+                monthWrapper.appendChild(monthTitle);
+                monthWrapper.appendChild(calendar);
+                container.appendChild(monthWrapper);
+                
+                // Update this month with study plan data
+                updateMonthWithStudyPlan(monthWrapper, monthData);
+            });
+        }
+        
+        // Function to update a single month with study plan data
+        function updateMonthWithStudyPlan(monthWrapper, monthData) {
+            const calendar = monthWrapper.querySelector('.calendar');
+            const cells = calendar.querySelectorAll('td');
+            
+            monthData.days.forEach(day => {
+                const dayDate = day.date;
+                
+                for (let i = 0; i < cells.length; i++) {
+                    const cell = cells[i];
+                    
+                    // Skip empty days
+                    if (cell.classList.contains('empty-day')) continue;
+                    
+                    // Get the day number
+                    const dayNumberDiv = cell.querySelector('.day-number');
+                    if (!dayNumberDiv) continue;
+                    
+                    const dayNumber = parseInt(dayNumberDiv.textContent);
+                    
+                    // Check if this cell matches our date
+                    if (dayDate.getDate() === dayNumber && 
+                        dayDate.getMonth() === monthData.month && 
+                        dayDate.getFullYear() === monthData.year) {
+                        
+                        // Clear any existing module tags
+                        const existingModuleTags = cell.querySelectorAll('.module-tag');
+                        existingModuleTags.forEach(tag => tag.remove());
+                        
+                        // Add module tag
+                        const moduleTag = document.createElement('div');
+                        moduleTag.classList.add('module-tag');
+                        
+                        if (day.module === 'exam') {
+                            cell.classList.add('exam-day');
+                            moduleTag.textContent = 'EXAM';
+                        } else {
+                            moduleTag.classList.add(day.module);
+                            const moduleNames = {
+                                'module1': 'Module 1',
+                                'module2': 'Module 2',
+                                'module3': 'Module 3',
+                                'module4': 'Module 4',
+                                'revision': 'Revision'
+                            };
+                            moduleTag.textContent = moduleNames[day.module];
+                        }
+                        
+                        cell.appendChild(moduleTag);
+                        break;
+                    }
+                }
+            });
+        }
+        
+        // Function to update calendar with study plan
+        function updateCalendarWithStudyPlan(studyPlan) {
+            // First, clear any existing study plan
+            clearCalendarStudyPlan();
+            
+            // For each day in the study plan
+            studyPlan.forEach(day => {
+                const dayDate = day.date;
+                const module = day.module;
+                
+                // Find the cell for this date
+                const cells = document.querySelectorAll('td');
+                
+                for (let i = 0; i < cells.length; i++) {
+                    const cell = cells[i];
+                    
+                    // Skip empty days
+                    if (cell.classList.contains('empty-day')) continue;
+                    
+                    // Get the day number
+                    const dayNumberDiv = cell.querySelector('.day-number');
+                    if (!dayNumberDiv) continue;
+                    
+                    const dayNumber = parseInt(dayNumberDiv.textContent);
+                    
+                    // Check if this cell matches our date
+                    if (dayDate.getDate() === dayNumber && 
+                        dayDate.getMonth() === currentMonth && 
+                        dayDate.getFullYear() === currentYear) {
+                        
+                        // Clear any existing module tags
+                        const existingModuleTags = cell.querySelectorAll('.module-tag');
+                        existingModuleTags.forEach(tag => tag.remove());
+                        
+                        // Add module tag
+                        const moduleTag = document.createElement('div');
+                        moduleTag.classList.add('module-tag');
+                        
+                        if (module === 'exam') {
+                            cell.classList.add('exam-day');
+                            moduleTag.textContent = 'EXAM';
+                        } else {
+                            moduleTag.classList.add(module);
+                            const moduleNames = {
+                                'module1': 'Module 1',
+                                'module2': 'Module 2',
+                                'module3': 'Module 3',
+                                'module4': 'Module 4',
+                                'revision': 'Revision'
+                            };
+                            moduleTag.textContent = moduleNames[module];
+                        }
+                        
+                        cell.appendChild(moduleTag);
+                        break;
+                    }
+                }
+            });
+            
+            // Update multi-month view if it's active
+            if (document.getElementById('multiMonthView').style.display !== 'none') {
+                renderMultiMonthView();
+            }
+        }
+        
+        // Function to clear study plan from calendar
+        function clearCalendarStudyPlan() {
+            const cells = document.querySelectorAll('td');
+            
+            for (let i = 0; i < cells.length; i++) {
+                const cell = cells[i];
+                
+                // Remove exam day class
+                cell.classList.remove('exam-day');
+                
+                // Remove module tags
+                const moduleTags = cell.querySelectorAll('.module-tag');
+                moduleTags.forEach(tag => tag.remove());
+            }
+        }
+    </script>
+</body>
+</html>
