@@ -1,0 +1,228 @@
+[
+  {
+    "Question": "Solve the ODE: (x - 4)y^4 dx - x^3 (y^2 - 3) dy = 0.",
+    "Solution": "-(1/x) + (2/x²) + (1/y) - (1/y³) = C",
+    "Steps": [
+      "The given equation is separable. Rewrite it as: (x - 4)y^4 dx - x^3 (y^2 - 3) dy = 0.",
+      "Separate the variables: (x - 4)/x^3 dx - (y^2 - 3)/y^4 dy = 0.",
+      "Integrate both sides: ∫ (x - 4)/x^3 dx - ∫ (y^2 - 3)/y^4 dy = C.",
+      "Solving the integrals, we obtain: -1/x + 2/x² + 1/y - 1/y³ = C.",
+      "Where C is the arbitrary constant."
+    ],
+    "Topic": "Variable Separable Differential Equations"
+  },
+  {
+    "Question": "Solve the ODE (x² - 3y²)dx + 2xy dy = 0.",
+    "Solution": "The solution to the ODE is y² - x² = Cx³, where C is the arbitrary constant.",
+    "Steps": [
+      "Rewrite the given equation in the form: dy/dx = (3y² - x²) / (2xy).",
+      "Let y = vx, then dy/dx = v + x dv/dx."                              ,
+      "Substituting into the equation: v + x dv/dx = (3v² - 1) / (2v)."    ,
+      "Rearrange: x dv/dx = (v² - 1) / (2v)."                              ,
+      "Separate the variables: (2v / (v² - 1)) dv = (1/x) dx."             ,
+      "Integrate both sides: log(v² - 1) = log x + log C."                 ,
+      "Rearrange: (v² - 1)/x = C."                                         ,
+      "Replace v with y/x: y² - x² = Cx³."
+    ],
+    "Topic": "Homogeneous ODE using substitution and separation of variables"
+  },
+  {
+    "Question": "Solve the ODE (y - x + 1)dx - (x + y + 5)dy = 0.",
+    "Solution": "The solution to the ODE is: tan⁻¹((y + 3)/(x + 2)) + (1/2) log(1 + ((y + 3)/(x + 2))²) = -log(x + 2) + C.",
+    "Steps": [
+      "Rewrite the given equation as dy/dx = (y - x + 1) / (x + y + 5).",
+      "Use substitution: x = X + h, y = Y + k, where h and k satisfy:",
+      "  -h + k + 1 = 0",
+      "  h + k + 5 = 0",
+      "Solving gives: h = -2, k = -3.",
+      "Transforming, the equation simplifies to dY/dX = (Y - X) / (X + Y).",
+      "Using Y = VX, substitute and simplify: X dV/dX = (-1 + V²) / (1 + V).",
+      "Separate variables and integrate: ∫(1 + V) / (1 + V²) dV = -∫(1/X) dX.",
+      "Solving, we get: tan⁻¹(V) + (1/2) log(1 + V²) = -log X + C.",
+      "Replacing V = (Y/X) and reverting to x, y: tan⁻¹((y + 3)/(x + 2)) + (1/2) log(1 + ((y + 3)/(x + 2))²) = -log(x + 2) + C."
+    ],
+    "Topic": "Homogeneous ODE using substitution and separation of variables"
+  },
+  {
+    "Question": "Solve the ODE (y - x)dx - (y - x + 2)dy = 0.",
+    "Solution": "The solution to the ODE is: (y - x)²/2 + 2y = C.",
+    "Steps": [
+      "Rewrite as dy/dx = (y - x) / (y - x + 2)."               ,
+      "Introduce substitution: z = y - x, so dz/dx = dy/dx - 1.",
+      "Rewriting: dz/dx = (z / (z + 2)) - 1."                   ,
+      "Simplify: dz/dx = -2 / (z + 2)."                         ,
+      "Separate variables: (z + 2)dz = -2dx."                   ,
+      "Integrate both sides: ∫(z + 2) dz = ∫-2 dx."             ,
+      "Solving: z²/2 + 2z = -2x + C."                           ,
+      "Substituting back z = y - x: (y - x)²/2 + 2y = C."
+    ],
+    "Topic": "First-order ODE using substitution and separable variables"
+  },
+  {
+    "Question": "Solve the ODE x dy/dx + 2y = x sin x.",
+    "Solution": "The solution to the ODE is: yx² = -x² cos x + 2x sin x + 2 cos x + C.",
+    "Steps": [
+      "Rewrite in standard form: dy/dx + (2y/x) = sin x.",
+      "Identifying coefficients: P(x) = 2/x, Q(x) = sin x.",
+      "Find the integrating factor (I.F.): I.F. = e^(∫(2/x)dx) = x².",
+      "Multiply the equation by I.F.: x² dy/dx + 2x y = x² sin x.",
+      "Recognize the left side as a derivative: d/dx (yx²) = x² sin x.",
+      "Integrate both sides: ∫x² sin x dx.",
+      "Using integration by parts, we obtain: ∫x² sin x dx = -x² cos x + 2x sin x + 2 cos x.",
+      "Thus, yx² = -x² cos x + 2x sin x + 2 cos x + C."
+    ],
+    "Topic": "First-order linear ODE using an integrating factor"
+  },
+  {
+    "Question": "Solve the homogeneous linear differential equation: d²y/dx² + 9y = 0.",
+    "Solution": "The general solution is y = C₁ sin 3x + C₂ cos 3x.",
+    "Steps": [
+      "Rewrite as (D² + 9)y = 0.",
+      "Find the characteristic equation: m² + 9 = 0.",
+      "Solving: m = ±3i (pure imaginary roots).",
+      "For roots α = 0, β = 3, the general solution is: y = e^(0x)(C₁ sin 3x + C₂ cos 3x).",
+      "Since e^0 = 1, the final solution simplifies to: y = C₁ sin 3x + C₂ cos 3x."
+    ],
+    "Topic": "Homogeneous Linear Differential Equations with Imaginary Roots"
+  },
+  {
+    "Question": "Solve the ODE: (3x^2y^4 + 2xy)dx + (2x^3y^3 - x^2)dy = 0. (Completed Version)",
+    "Solution": "x^3y^2 + (x^2 / y) = C",
+    "Steps": [
+      "Identify M(x,y) = 3x^2y^4 + 2xy, N(x,y) = 2x^3y^3 - x^2.",
+      "Check exactness: ∂M/∂y = 12x^2y^3 + 2x, ∂N/∂x = 6x^2y^3 - 2x ⇒ not exact.",
+      "Find an integrating factor. Through analysis (often guessed or derived), one suitable I.F. is 1/y^2.",
+      "Multiply the entire equation by 1/y^2: (3x^2y^2 + 2x/y) dx + (2x^3y - x^2/y^2) dy = 0.",
+      "Now check exactness again; it becomes exact.",
+      "Integrate w.r.t x: ∫(3x^2y^2 + 2x/y) dx = x^3y^2 + (x^2)/(y).",
+      "Differentiate w.r.t y (or integrate N) confirms consistency, so the general solution is:",
+      "x^3y^2 + (x^2 / y) = C."
+    ],
+    "Topic": "Making a non-exact ODE exact with an integrating factor"
+  },
+  {
+    "Question": "Solve the homogeneous linear differential equation: d²y/dx² + 9y = 0.",
+    "Solution": "y = C₁ sin(3x) + C₂ cos(3x)",
+    "Steps": [
+      "Rewrite as (D² + 9)y = 0.",
+      "The characteristic (auxiliary) equation is m² + 9 = 0.",
+      "Solve: m = ±3i (pure imaginary).",
+      "General solution for imaginary roots ± iβ is y = e^(0x)(C₁ sin(3x) + C₂ cos(3x)) ⇒ y = C₁ sin(3x) + C₂ cos(3x)."
+    ],
+    "Topic": "Homogeneous Linear ODE with Constant Coefficients (Imaginary Roots)"
+  },
+  {
+    "Question": "Solve the homogeneous linear differential equation with constant coefficients: d²y/dx² - 6(dy/dx) + 9y = 0.",
+    "Solution": "y = (C₁ + C₂ x) e^(3x)",
+    "Steps": [
+      "Rewrite as (D² - 6D + 9)y = 0.",
+      "The characteristic equation: m² - 6m + 9 = 0.",
+      "Factor: (m - 3)(m - 3) = 0 ⇒ repeated root m = 3.",
+      "For a repeated root m = 3, the general solution is y = (C₁ + C₂ x) e^(3x)."
+    ],
+    "Topic": "Homogeneous Linear ODE with Repeated Real Roots"
+  },
+  {
+    "Question": "Solve the homogeneous linear differential equation with constant coefficients: d³y/dx³ - 4 d²y/dx² + (dy/dx) + 6y = 0.",
+    "Solution": "y = C₁ e^(-x) + C₂ e^(2x) + C₃ e^(3x)",
+    "Steps": [
+      "Write as (D³ - 4D² + D + 6)y = 0.",
+      "Characteristic equation: m³ - 4m² + m + 6 = 0.",
+      "By inspection or trial, m = -1 is a root. Factor out (m + 1): (m + 1)(m² - 5m + 6) = 0.",
+      "Then (m² - 5m + 6) factors to (m - 2)(m - 3).",
+      "Hence the roots are m = -1, 2, 3 (all real, distinct).",
+      "General solution: y = C₁ e^(-x) + C₂ e^(2x) + C₃ e^(3x)."
+    ],
+    "Topic": "Higher-Order Homogeneous Linear ODE with Constant Coefficients"
+  },
+  {
+    "Question": "Solve the differential equation: (3y - 2xy^3)dx + (4x - 3x^2y^2)dy = 0.",
+    "Solution": "x^3y^4 - (x^4/2) y^6 = C",
+    "Steps": [
+      "Rewrite and identify structure, possibly grouping terms. (Often approached via an integrating factor of the form x^h y^k.)",
+      "Find h, k such that the equation becomes exact upon multiplying by x^h y^k. (After some work, h = 2, k = 3.)",
+      "Multiply by x^2 y^3: (3x^2y^4 - 2x^3y^6)dx + (4x^3y^3 - 3x^4y^5)dy = 0.",
+      "Now exact. Integrate w.r.t x: ∫(3x^2y^4 - 2x^3y^6) dx = x^3y^4 - (x^4/2) y^6 + f(y).",
+      "Check consistency with ∂/∂y of that expression = (4x^3y^3 - 3x^4y^5), leading to the final solution:",
+      "x^3y^4 - (x^4/2) y^6 = C."
+    ],
+    "Topic": "Homogeneous Differential Equation with an Integrating Factor"
+  },
+  {
+    "Question": "Solve the differential equation: (x^2y - 2xy^2)dx + (3x^2y - x^3)dy = 0.",
+    "Solution": "x/y + log((y^3)/(x^2)) = C   (equivalently, x/y - log(x^2 / y^3) = C)",
+    "Steps": [
+      "Identify M(x,y) = x^2y - 2xy^2, N(x,y) = 3x^2y - x^3.",
+      "Check exactness: ∂M/∂y = x^2 - 4xy, ∂N/∂x = 6x^2y - 3x^2 ⇒ not exact.",
+      "Check homogeneity: Mx + Ny = x^2y^2 ≠ 0 ⇒ suggests an integrating factor I.F. = 1/(x^2 y^2).",
+      "Multiply the original equation by 1/(x^2 y^2): (1/y - 2/x) dx + (3/y - x/y^2) dy = 0.",
+      "This new form is exact. Integrate: ∫(1/y - 2/x) dx + ∫(3/y) dy = C.",
+      "Compute integrals: x/y - 2 log|x| + 3 log|y| = C.",
+      "Rearrange: x/y + log((y^3)/(x^2)) = C."
+    ],
+    "Topic": "Exact Differential Equations with Integrating Factors"
+  },
+  {
+    "Question": "Solve the differential equation: (2xy + y^2)dx + (x^2 + 2xy)dy = 0.",
+    "Solution": "x^2 + 2xy + y^2 = C",
+    "Steps": [
+      "Identify M(x,y) = 2xy + y^2, N(x,y) = x^2 + 2xy.",
+      "Check exactness: ∂M/∂y = 2x + 2y, ∂N/∂x = 2x + 2y ⇒ exact.",
+      "Integrate M w.r.t x: x^2 y + xy^2 = ∫(2xy + y^2) dx = x^2 y + xy^2.",
+      "Integrate N w.r.t y: x^2 y + xy^2 = ∫(x^2 + 2xy) dy = x^2 y + xy^2.",
+      "The general solution is x^2 + 2xy + y^2 = C."
+    ],
+    "Topic": "Exact Differential Equations"
+  },
+  {
+    "Question": "Solve the differential equation: (2xy + y^2)dx + (x^2 + 2xy)dy = 0.",
+    "Solution": "x^2 + 2xy + y^2 = C",
+    "Steps": [
+      "Identify M(x,y) = 2xy + y^2, N(x,y) = x^2 + 2xy.",
+      "Check exactness: ∂M/∂y = 2x + 2y, ∂N/∂x = 2x + 2y ⇒ exact.",
+      "Integrate M w.r.t x: x^2 y + xy^2 = ∫(2xy + y^2) dx = x^2 y + xy^2.",
+      "Integrate N w.r.t y: x^2 y + xy^2 = ∫(x^2 + 2xy) dy = x^2 y + xy^2.",
+      "The general solution is x^2 + 2xy + y^2 = C."
+    ],
+    "Topic": "Exact Differential Equations"
+  },  
+  {
+    "Question": "Solve the ODE: x (dy/dx) + y = x y^3.",
+    "Solution": "Use Bernoulli's equation form and solve via standard substitution. Final relation: 1/(x^2 y^2) = 2/x + C, or equivalently x^2 y^2 = 1/(2/x + C).",
+    "Steps": [
+      "Rewrite: x dy/dx + y = x y^3 ⇒ dy/dx + (y/x) = y^3.",
+      "This is a Bernoulli equation with n = 3. Let v = y^(1-3) = y^(-2).",
+      "Then dv/dx = -2 y^(-3) dy/dx. Carefully transform the ODE to a linear equation in v.",
+      "After substitution, the equation becomes dv/dx - (2/x)v = -2.",
+      "The integrating factor is I.F. = e^(∫(-2/x) dx) = e^(-2 ln|x|) = 1/x^2.",
+      "Multiply through and integrate to find v/x^2 = something + constant.",
+      "Back-substitute v = 1/y^2 to get 1/(x^2 y^2) = expression in x + C."
+    ],
+    "Topic": "Bernoulli Differential Equation"
+  },
+  {
+    "Question": "Solve the ODE: (3x^2y^4 + 2xy)dx + (2x^3y^3 - x^2)dy = 0. (Partial / Not fully solved)",
+    "Solution": "Verifying exactness: M(x,y) = 3x^2y^4 + 2xy, N(x,y) = 2x^3y^3 - x^2. The equation is not exact; an integrating factor is needed. (See #9 for the completed version.)",
+    "Steps": [
+      "Compute partial derivatives: ∂M/∂y = 12x^2y^3 + 2x, ∂N/∂x = 6x^2y^3 - 2x.",
+      "Since they are not equal, the ODE is not exact.",
+      "Attempt an integrating factor in terms of x or y alone, or x^my^n. (Continued in next version.)"
+    ],
+    "Topic": "Exactness check and preliminary steps"
+  },
+  {
+    "Question": "Solve the ODE: (3x^2y^4 + 2xy)dx + (2x^3y^3 - x^2)dy = 0. (Completed Version)",
+    "Solution": "x^3y^2 + (x^2 / y) = C",
+    "Steps": [
+      "Identify M(x,y) = 3x^2y^4 + 2xy, N(x,y) = 2x^3y^3 - x^2.",
+      "Check exactness: ∂M/∂y = 12x^2y^3 + 2x, ∂N/∂x = 6x^2y^3 - 2x ⇒ not exact.",
+      "Find an integrating factor. Through analysis (often guessed or derived), one suitable I.F. is 1/y^2.",
+      "Multiply the entire equation by 1/y^2: (3x^2y^2 + 2x/y) dx + (2x^3y - x^2/y^2) dy = 0.",
+      "Now check exactness again; it becomes exact.",
+      "Integrate w.r.t x: ∫(3x^2y^2 + 2x/y) dx = x^3y^2 + (x^2)/(y).",
+      "Differentiate w.r.t y (or integrate N) confirms consistency, so the general solution is:",
+      "x^3y^2 + (x^2 / y) = C."
+    ],
+    "Topic": "Making a non-exact ODE exact with an integrating factor"
+  }
+]
