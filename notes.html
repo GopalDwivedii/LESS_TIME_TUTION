@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Math Notes - LESS TIME TUTION</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2A2E45; 
+            --secondary-color: #5C6B73;
+            --accent-color: #C4D6E4;
+            --highlight-color: #f68665;
+        }
+
+        /* New Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes cartBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background-size: 200% 200%;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            animation: gradientShift 12s ease infinite;
+        }
+
+        .course-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .course-card:nth-child(1) { animation-delay: 0.2s; }
+        .course-card:nth-child(2) { animation-delay: 0.4s; }
+        .course-card:nth-child(3) { animation-delay: 0.6s; }
+        .course-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .course-card::before {
+            content: "Premium Content";
+            position: absolute;
+            top: 12px;
+            right: -34px;
+            background: var(--highlight-color);
+            color: white;
+            padding: 6px 35px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: badgeEntrance 0.6s ease-out;
+        }
+
+        .module-card {
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            position: relative;
+            transform-origin: center bottom;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .price-tag {
+            background: var(--highlight-color);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+
+        .buy-btn {
+            background: var(--primary-color);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transform-origin: center;
+        }
+
+        .buy-btn:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cart-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1) rotate(8deg);
+        }
+
+        .cart-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .demo-preview {
+            border: 2px dashed var(--highlight-color);
+            border-radius: 12px;
+            background: rgba(245, 106, 63, 0.05);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Animation Keyframes */
+        @keyframes badgeEntrance {
+            from {
+                opacity: 0;
+                transform: rotate(45deg) translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(45deg) translateX(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes cartUpdate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-graduation-cap me-2"></i>LESS TIME TUTION
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#applied1">Math 1</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applied2">Math 2</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applied3">Math 3</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applied4">Math 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5 mt-5">
+        <h1 class="text-center mb-5 display-4 fw-bold text-primary" style="animation: fadeInUp 0.6s ease;">Premium Math Notes</h1>
+        
+        <!-- Demo Section -->
+        <div class="demo-preview p-4 mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h3 class="text-primary">Free Demo Preview</h3>
+                    <p class="lead">Get a glimpse of our premium content quality</p>
+                    <a href="YOUR_DEMO_PDF_LINK_HERE" 
+                       class="btn btn-lg btn-outline-primary"
+                       target="_blank">
+                        <i class="fas fa-file-pdf me-2"></i>View Full Demo PDF
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="YOUR_DEMO_PDF_LINK_HERE#view=fitH" 
+                                style="border: none; border-radius: 8px;"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Container -->
+        <div class="row g-4" id="courseContainer"></div>
+    </div>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon bg-primary text-white p-3 rounded-circle" onclick="showCart()">
+        <i class="fas fa-shopping-cart fa-lg"></i>
+        <span class="badge bg-danger position-absolute top-0 start-100 translate-middle" id="cartCount">0</span>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Your Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems" class="mb-3"></div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5>Total:</h5>
+                        <h4 class="text-primary">₹<span id="cartTotal">0</span></h4>
+                    </div>
+                    <button class="btn btn-primary w-100 py-2" onclick="proceedToCheckout()">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const courses = [
+            {
+                id: "applied1",
+                title: "Applied Mathematics I",
+                modules: [
+                    "Matrices & Determinants",
+                    "Differential Calculus",
+                    "Integral Calculus",
+                    "Vector Calculus"
+                ]
+            },
+            {
+                id: "applied2",
+                title: "Applied Mathematics II",
+                modules: [
+                    "Ordinary Differential Equations",
+                    "Laplace Transform",
+                    "Functions of Complex Variables",
+                    "Complex Integration"
+                ]
+            },
+            {
+                id: "applied3",
+                title: "Applied Mathematics III",
+                modules: [
+                    "Partial Differential Equations",
+                    "Applications of PDEs",
+                    "Fourier Series",
+                    "Fourier Transforms"
+                ]
+            },
+            {
+                id: "applied4",
+                title: "Applied Mathematics IV",
+                modules: [
+                    "Iterative Techniques & Interpolation",
+                    "Numerical Differentiation & Integration",
+                    "Probability & Distributions",
+                    "Dispersion & Curve Fitting"
+                ]
+            }
+        ];
+
+        let cart = [];
+        const courseContainer = document.getElementById('courseContainer');
+
+        // Render Courses
+        courses.forEach((course, index) => {
+            const courseHTML = `
+                <div class="col-12" id="${course.id}">
+                    <div class="course-card card" style="animation-delay: ${index * 0.2}s">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h3 class="mb-0">${course.title}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-4">
+                                ${course.modules.map((module, idx) => `
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="module-card h-100 p-3" style="animation-delay: ${index * 0.2 + idx * 0.1}s">
+                                            <h5 class="mb-3">${module}</h5>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="price-tag">₹25</span>
+                                                <button class="btn buy-btn" 
+                                                    onclick="addToCart('${course.title}', '${module}')">
+                                                    <i class="fas fa-cart-plus"></i> Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            courseContainer.innerHTML += courseHTML;
+        });
+
+        // Cart Functions
+        function addToCart(course, module) {
+            cart.push({
+                id: Date.now(),
+                course: course,
+                module: module,
+                price: 25
+            });
+            updateCart();
+            document.getElementById('cartCount').animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.5)' },
+                { transform: 'scale(1)' }
+            ], {
+                duration: 400,
+                easing: 'ease-out'
+            });
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        function updateCart() {
+            document.getElementById('cartCount').textContent = cart.length;
+            
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item rounded">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-0">${item.module}</h6>
+                            <small class="text-muted">${item.course}</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <span>₹${item.price}</span>
+                            <button class="btn btn-sm btn-danger" 
+                                onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('cartTotal').textContent = 
+                cart.reduce((sum, item) => sum + item.price, 0);
+        }
+
+        function showCart() {
+            new bootstrap.Modal('#cartModal').show();
+        }
+
+        function proceedToCheckout() {
+            if(cart.length === 0) return alert('Cart is empty!');
+            alert('Redirecting to payment gateway...');
+        }
+    </script>
+</body>
+</html>
