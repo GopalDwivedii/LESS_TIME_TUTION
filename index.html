@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Less Time Tuition - Where Mathematics is Easiest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+    
+        .avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+        .navbar {
+            background: #023047;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: #023047;
+            padding: 5px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dropdown-content {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Enhanced Typing Animation */
+        .typing-animation {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .typing-animation::after {
+            content: '|';
+            position: absolute;
+            right: -8px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1 }
+            50% { opacity: 0 }
+        }
+        
+        /* Enhanced Stat Box Animation */
+        .stat-box {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #caf0f8, transparent);
+            transition: 0.5s;
+        }
+        
+        .stat-box:hover::before {
+            left: 100%;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px) scale(1.03) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(30, 58, 138, 0.2);
+        }
+        
+
+         /* stats-section h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    text-align: center;
+    min-width: 200px;
+    background: linear-gradient(to right, #73ad90, #4ea265);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: #206542;
+}
+
+.stat-box:hover {
+    /* transform: translateY(-10px); 
+    box-shadow: 2px 6px 10px rgba(15, 219, 212, 0.15);
+}
+
+.stat-box i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.stat-box h3 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.stat-box p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+#stats{
+    text-align: center;
+} */
+        /* Enhanced Course Card */
+        .course-card {
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* Enhanced Testimonial Card */
+        .testimonial-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.03) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 64, 175, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .testimonial-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* New Animations */
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Enhanced Gradient Text */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .gradient-text:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* Enhanced Glow Effect */
+        .glow {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .glow:hover {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+        }
+        
+        /* Enhanced Hover Underline Animation */
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        
+        /* Enhanced Loading Animation */
+        .loading-bar {
+            position: relative;
+            overflow: hidden;
+            height: 4px;
+            border-radius: 2px;
+        }
+        
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Counter Animation */
+        .counter {
+            position: relative;
+        }
+        
+        .counter::after {
+            content: '+';
+            position: relative;
+            right: -15px;
+        }
+        
+        /* Enhanced Dropdown */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        /* Professional Button Effects */
+        .btn-effect {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-effect:hover::before {
+            left: 100%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateY(-20px);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        /* Form Styles */
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .form-label {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:placeholder-shown + .form-label {
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+        
+        /* Social Login Buttons */
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Toggle Password Visibility */
+        .password-toggle {
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 opacity-0 invisible transition-all duration-300">
+        <div class="modal-content bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-md mx-4 transform transition-all duration-300">
+            <div class="relative">
+                <button id="close-login" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <div class="p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
+                        <p class="text-gray-600">Login to access your dashboard and continue learning</p>
+                    </div>
+                    
+                    <form id="login-form" class="space-y-6">
+                        <div class="relative">
+                            <input type="email" id="login-email" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Email Address" required>
+                            <label for="login-email" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">Email Address</label>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="password" id="login-password" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all pr-12" placeholder="Password" required>
+                            <label for="login-password" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">Password</label>
+                            <span class="password-toggle absolute right-4 text-gray-500 hover:text-gray-700">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="remember-me" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                            </div>
+                            <a href="#" class="text-sm text-blue-600 hover:text-blue-800 hover-underline-animation">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-md glow btn-effect">
+                            Login to Account
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 grid grid-cols-2 gap-3">
+                            <a href="#" class="social-btn w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all">
+                                <i class="fab fa-google text-red-500 mr-2"></i> Google
+                            </a>
+                            <a href="#" class="social-btn w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all">
+                                <i class="fab fa-facebook-f text-blue-600 mr-2"></i> Facebook
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-gray-600">
+                            Don't have an account? 
+                            <button id="show-register" class="text-blue-600 font-medium hover:text-blue-800 hover-underline-animation">Register here</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 opacity-0 invisible transition-all duration-300">
+        <div class="modal-content bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-md mx-4 transform transition-all duration-300">
+            <div class="relative">
+                <button id="close-register" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <div class="p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Create Account</h2>
+                        <p class="text-gray-600">Join our community and start your learning journey</p>
+                    </div>
+                    
+                    <form id="register-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="relative">
+                                <input type="text" id="first-name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="First Name" required>
+                                <label for="first-name" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">First Name</label>
+                            </div>
+                            <div class="relative">
+                                <input type="text" id="last-name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Last Name" required>
+                                <label for="last-name" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">Last Name</label>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="email" id="register-email" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Email Address" required>
+                            <label for="register-email" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">Email Address</label>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="password" id="register-password" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all pr-12" placeholder="Password" required>
+                            <label for="register-password" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">Password</label>
+                            <span class="password-toggle absolute right-4 text-gray-500 hover:text-gray-700">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="password" id="confirm-password" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all pr-12" placeholder="Confirm Password" required>
+                            <label for="confirm-password" class="form-label absolute left-4 top-3 text-gray-500 pointer-events-none transition-all">Confirm Password</label>
+                            <span class="password-toggle absolute right-4 text-gray-500 hover:text-gray-700">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="terms" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-blue-600 hover:text-blue-800 hover-underline-animation">Terms & Conditions</a> and <a href="#" class="text-blue-600 hover:text-blue-800 hover-underline-animation">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-md glow btn-effect">
+                            Create Account
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-white text-gray-500">Or sign up with</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 grid grid-cols-2 gap-3">
+                            <a href="#" class="social-btn w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all">
+                                <i class="fab fa-google text-red-500 mr-2"></i> Google
+                            </a>
+                            <a href="#" class="social-btn w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all">
+                                <i class="fab fa-facebook-f text-blue-600 mr-2"></i> Facebook
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-gray-600">
+                            Already have an account? 
+                            <button id="show-login" class="text-blue-600 font-medium hover:text-blue-800 hover-underline-animation">Login here</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Navigation Bar -->
+    <nav class="navbar fixed top-0 w-full z-50 py-4 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="logo text-white text-2xl font-bold">
+                    <span >
+                        <img src="2.jpg" alt="Image description" class="h-6 w-auto inline pl-4 ml-4">
+
+                    </span>
+                    <span class="ml-2 hidden sm:inline-block hover:text-blue-200 transition-colors">LESS TIME TUITION</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-white hover:text-blue-200 transition-colors font-medium hover-underline-animation">Home</a>
+                
+                <!-- Enhanced Dropdown -->
+                <div class="dropdown relative group">
+                    <button class="text-white hover:text-blue-200 transition-colors font-medium flex items-center hover-underline-animation">
+                        Applied Mathematics <i class="fas fa-chevron-down ml-1 text-sm transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div class="dropdown-content absolute hidden mt-2 w-48 bg-white rounded-md shadow-xl z-50 border border-gray-200 transform origin-top">
+                        <a href="am-1new.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 transition-colors flex items-center">
+                            <i class="fas fa-calculator mr-2 text-blue-600"></i> Applied Math 1
+                        </a>
+                        <a href="applied-math-2.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 transition-colors flex items-center">
+                            <i class="fas fa-calculator mr-2 text-blue-600"></i> Applied Math 2
+                        </a>
+                        <a href="applied-math-3.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 transition-colors flex items-center">
+                            <i class="fas fa-calculator mr-2 text-blue-600"></i> Applied Math 3
+                        </a>
+                        <a href="applied-math-4.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 transition-colors flex items-center">
+                            <i class="fas fa-calculator mr-2 text-blue-600"></i> Applied Math 4
+                        </a>
+                    </div>
+                </div>
+
+                <a href="Exam-Planner.html" class="text-white hover:text-blue-200 transition-colors font-medium hover-underline-animation">Exam-Planner</a>
+                <a href="LLM_.html" class="text-white hover:text-blue-200 transition-colors font-medium hover-underline-animation">LLM</a>
+
+                <a href="notes.html" class="text-white hover:text-blue-200 transition-colors font-medium hover-underline-animation">Notes</a>
+                <a href="#contact" class="text-white hover:text-blue-200 transition-colors font-small hover-underline-animation">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="show-login-btn" class="text-white hover:text-blue-200 transition-colors font-medium hover-underline-animation">Login</button>
+                <button id="show-register-btn" class="bg-white text-blue-800 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-all transform hover:scale-105 shadow-md glow btn-effect">Register</button>
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-900 absolute top-full left-0 right-0 shadow-lg rounded-b-lg animate-fade-in-up">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-white hover:bg-blue-800 rounded-md transition-colors">Home</a>
+                <div class="relative">
+                    <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 text-white hover:bg-blue-800 rounded-md flex justify-between items-center transition-colors">
+                        Applied Mathematics <i class="fas fa-chevron-down text-sm transition-transform"></i>
+                    </button>
+                    <div id="mobile-dropdown-content" class="hidden pl-4 animate-fade-in-up">
+                        <a href="am-1new.html" class="block px-3 py-2 text-blue-200 hover:bg-blue-800 rounded-md transition-colors">Applied Math 1</a>
+                        <a href="#" class="block px-3 py-2 text-blue-200 hover:bg-blue-800 rounded-md transition-colors">Applied Math 2</a>
+                        <a href="#" class="block px-3 py-2 text-blue-200 hover:bg-blue-800 rounded-md transition-colors">Applied Math 3</a>
+                        <a href="#" class="block px-3 py-2 text-blue-200 hover:bg-blue-800 rounded-md transition-colors">Applied Math 4</a>
+                    </div>
+                </div>
+                <a href="notes.html" class="block px-3 py-2 text-white hover:bg-blue-800 rounded-md transition-colors">Notes</a>
+                <a href="#contact" class="block px-3 py-2 text-white hover:bg-blue-800 rounded-md transition-colors">Contact</a>
+                <button id="mobile-show-login" class="block w-full text-left px-3 py-2 text-white hover:bg-blue-800 rounded-md transition-colors">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24">
+        <div x-data="slider()" class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="overflow-hidden relative rounded-xl shadow-2xl">
+                <div class="flex transition-transform duration-700 ease-in-out" 
+                     :style="`transform: translateX(-${currentSlide * 100}%)`">
+                    <!-- Slide 1 -->
+                    <div class="w-full flex-shrink-0 relative">
+                        <img src="6.jpg" alt="Mathematics Learning" class="w-full h-[400px] md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/40 flex items-center">
+                            <div class="max-w-2xl px-8 animate-slide-in-left">
+                                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Master Applied Mathematics</h2>
+                                <p class="text-lg md:text-xl mb-6 text-blue-100">Learn complex concepts with simple, step-by-step explanations from expert educators.</p>
+                                <button class="bg-white text-blue-800 px-6 py-3 rounded-lg font-bold hover:bg-blue-100 transition-all transform hover:scale-105 shadow-lg glow animate-pulse btn-effect">
+                                    Start Learning Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="w-full flex-shrink-0 relative">
+                        <img src="1.jpg" alt="Online Classes" class="w-full h-[400px] md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/40 flex items-center">
+                            <div class="max-w-2xl px-8 animate-slide-in-right">
+                                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Interactive Online Classes</h2>
+                                <p class="text-lg md:text-xl mb-6 text-blue-100">Join live sessions and get your doubts cleared in real-time.</p>
+                                <button class="bg-white text-blue-800 px-6 py-3 rounded-lg font-bold hover:bg-blue-100 transition-all transform hover:scale-105 shadow-lg glow animate-pulse btn-effect">
+                                    View Schedule
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="w-full flex-shrink-0 relative">
+                        <img src="im5.jpg" alt="Study Materials" class="w-full h-[400px] md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/40 flex items-center">
+                            <div class="max-w-2xl px-8 animate-fade-in-up">
+                                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">Comprehensive Study Materials</h2>
+                                <p class="text-lg md:text-xl mb-6 text-blue-100">Access curated notes, practice problems, and video solutions.</p>
+                                <button class="bg-white text-blue-800 px-6 py-3 rounded-lg font-bold hover:bg-blue-100 transition-all transform hover:scale-105 shadow-lg glow animate-pulse btn-effect">
+                                    Download Resources
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 text-white p-2 rounded-full hover:bg-white/50 transition-all transform hover:scale-110">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                <button @click="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 text-white p-2 rounded-full hover:bg-white/50 transition-all transform hover:scale-110">
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+
+                <!-- Navigation Dots -->
+                <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <button 
+                            @click="currentSlide = index"
+                            :class="currentSlide === index ? 'bg-white w-6' : 'bg-white/50 w-3'"
+                            class="h-3 rounded-full transition-all duration-300 hover:bg-white/75"
+                        ></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tagline Section with Enhanced Typing Animation -->
+    <section class="py-12 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6 animate-fade-in-up">
+                LESS TIME TUITION
+            </h1>
+            <div class="overflow-hidden">
+                <p class="text-xl md:text-2xl text-blue-800 font-medium inline-block animate-typing" style="animation: typing 3.5s steps(40, end) forwards, blink 1s infinite; white-space: nowrap;">
+                    Where Mathematics is Easiest!!
+                </p>
+            </div>
+            <!-- <div class="mt-8 flex justify-center">
+                <div class="w-24 h-1 bg-blue-600 rounded-full animate-fade-in-up" style="animation-delay: 0.3s;"></div> 
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Statistics Section with Enhanced Counter Animation -->
+    <section id="stats" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12 animate-fade-in-up">
+                LTT: Mathematics Made <span class="gradient-text">Effortless</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stat-box bg-white p-8 rounded-xl shadow-lg text-center border border-blue-100 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 glow hover:rotate-12 transition-transform">
+                        <i class="fas fa-users text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="counter text-4xl font-bold text-blue-800 mb-2" data-target="10000">0</h3>
+                    <p class="text-gray-600 font-medium">HAPPY LEARNERS</p>
+                    <div class="loading-bar mt-4 rounded-full bg-blue-100 overflow-hidden">
+                        <div class="h-full bg-blue-600 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-box bg-white p-8 rounded-xl shadow-lg text-center border border-blue-100 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 glow hover:rotate-12 transition-transform">
+                        <i class="fab fa-youtube text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="counter text-4xl font-bold text-blue-800 mb-2" data-target="25000">0</h3>
+                    <p class="text-gray-600 font-medium">MONTHLY VIEWS</p>
+                    <div class="loading-bar mt-4 rounded-full bg-blue-100 overflow-hidden">
+                        <div class="h-full bg-blue-600 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-box bg-white p-8 rounded-xl shadow-lg text-center border border-blue-100 animate-fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 glow hover:rotate-12 transition-transform">
+                        <i class="fas fa-link text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="counter text-4xl font-bold text-blue-800 mb-2" data-target="500">0</h3>
+                    <p class="text-gray-600 font-medium">NEW MONTHLY SUBSCRIBERS</p>
+                    <div class="loading-bar mt-4 rounded-full bg-blue-100 overflow-hidden">
+                        <div class="h-full bg-blue-600 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- <section class="stats-section" id="stats">
+    <h2>LTT: Mathematics Made <i class="fa-regular fa-less-than fa-lg"style="font-size: medium;"></i> <b>Easy </b></h2>
+    <div class="stats-container">
+        <div class="stat-box">
+            <i class="fas fa-users"></i>
+            <h3 class="counter" data-target="10000">0</h3>
+            <p><b>HAPPY LEARNERS</b></p>
+        </div>
+        <div class="stat-box">
+            <i class="fab fa-youtube"></i>
+            <h3 class="counter" data-target="25000">0</h3>
+            <p><b>MONTHLY VIEWS </b></p>
+        </div>
+        <div class="stat-box">
+            <i class="fas fa-link"></i>
+            <h3 class="counter" data-target="500">0</h3>
+            <p><b>NEW MONTHLY SUBSCRIBERS</b></p>
+        </div>
+    </div>
+</section> -->
+    <!-- Teacher Introduction  -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in-up hover:shadow-2xl transition-shadow">
+                <div class="md:flex">
+                    <div class="md:w-1/3 relative">
+                        <img src="im7.jpg" alt="Om Prakash - Mathematics Teacher" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Om Prakash</h2>
+                                <p class="text-blue-200">Mathematics Educator</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/90 text-blue-800 px-3 py-1 rounded-full text-sm font-medium shadow-md hover:scale-110 transition-transform">
+                            <i class="fas fa-award mr-1"></i> 1.5+ Years Experience
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-2/3 p-8">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4">Meet Your Guide to Mathematical Excellence</h1>
+                        <p class="text-gray-600 mb-6">
+                            Welcome to <span class="text-blue-600 font-semibold">Less Time Tuition</span> – where we transform complex mathematical concepts into easily digestible lessons. With over a decade of teaching experience, I've helped thousands of students overcome their fear of mathematics and develop genuine confidence in problem-solving.
+                        </p>
+                        
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Our Approach:</h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-start animate-fade-in-up" style="animation-delay: 0.1s;">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>440+ comprehensive video tutorials covering Applied and Engineering Mathematics</span>
+                                </li>
+                                <li class="flex items-start animate-fade-in-up" style="animation-delay: 0.2s;">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>Step-by-step breakdown of complex concepts</span>
+                                </li>
+                                <li class="flex items-start animate-fade-in-up" style="animation-delay: 0.3s;">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>Practical applications and real-world examples</span>
+                                </li>
+                                <li class="flex items-start animate-fade-in-up" style="animation-delay: 0.4s;">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>Personalized attention through doubt-solving sessions</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-md glow btn-effect animate-fade-in-up" style="animation-delay: 0.5s;">
+                                <i class="fas fa-envelope mr-2"></i> Contact Me
+                            </a>
+                            <a href="#" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition-all transform hover:scale-105 animate-fade-in-up btn-effect" style="animation-delay: 0.6s;">
+                                <i class="fas fa-play-circle mr-2"></i> Watch Introduction
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    <!-- Courses Section -->
+    <section id="notes" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4 animate-fade-in-up">
+                Comprehensive Course Offerings
+            </h2>
+            <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Structured learning paths designed for academic success and conceptual mastery
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:border-blue-200 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="im5.jpg" alt="Applied Mathematics 1" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute bottom-0 left-0 bg-blue-600 text-white px-4 py-1 text-sm font-medium">
+                            Beginner Level
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/90 text-blue-800 px-2 py-1 rounded-full text-xs font-medium shadow-md hover:rotate-12 transition-transform">
+                            <i class="fas fa-star mr-1"></i> Popular
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Applied Mathematics I</h3>
+                        <p class="text-gray-600 mb-4">Master the fundamentals of applied mathematics with practical problem-solving techniques.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-600 font-medium">40+ Lessons</span>
+                            <a href="am-1new.html" class="text-blue-600 hover:text-blue-800 font-medium flex items-center hover-underline-animation">
+                                View Details <i class="fas fa-arrow-right ml-1 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:border-blue-200 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="back1.jpg" alt="Applied Mathematics 2" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute bottom-0 left-0 bg-green-600 text-white px-4 py-1 text-sm font-medium">
+                            Intermediate
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/90 text-blue-800 px-2 py-1 rounded-full text-xs font-medium shadow-md hover:rotate-12 transition-transform">
+                            <i class="fas fa-fire mr-1"></i> Trending
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Applied Mathematics II</h3>
+                        <p class="text-gray-600 mb-4">Advanced concepts with engineering applications and real-world problem solving.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-600 font-medium">52 Lessons</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center hover-underline-animation">
+                                View Details <i class="fas fa-arrow-right ml-1 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:border-blue-200 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="1.jpg" alt="Engineering Mathematics" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute bottom-0 left-0 bg-purple-600 text-white px-4 py-1 text-sm font-medium">
+                            Advanced
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/90 text-blue-800 px-2 py-1 rounded-full text-xs font-medium shadow-md hover:rotate-12 transition-transform">
+                            <i class="fas fa-bolt mr-1"></i> New
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Applied Mathematics III</h3>
+                        <p class="text-gray-600 mb-4">Specialized mathematics for engineering students with practical applications.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-600 font-medium">65 Lessons</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center hover-underline-animation">
+                                View Details <i class="fas fa-arrow-right ml-1 transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.7s;">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all transform hover:scale-105 glow btn-effect">
+                    View All Courses <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4 animate-fade-in-up">
+                What Our Students Say
+            </h2>
+            <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Success stories from our growing community of learners
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="flex items-center mb-6">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTtYlMT_y-EHdA3AHXBo3PNPDApVNmmbAKSQ&s" alt="Student" class="w-16 h-16 rounded-full object-cover border-4 border-blue-100 hover:border-blue-300 transition-colors">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800">Lord Stephen</h4>
+                            <p class="text-blue-600">B.Tech Student</p>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        Thank you for making math clear and simple. Your lessons are always concise and to the point. Thank you so much for saving our semesters.
+                    </p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="flex items-center mb-6">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTtYlMT_y-EHdA3AHXBo3PNPDApVNmmbAKSQ&s" alt="Student" class="w-16 h-16 rounded-full object-cover border-4 border-blue-100 hover:border-blue-300 transition-colors">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800">Aditya Maheshwari</h4>
+                            <p class="text-blue-600">Engineering Student</p>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        Thank you bhai.... joo tumnaa padhayaa wahi sabb exam mai aayaaa🤯😊 tum bahut easy way mai samjha te ho aur tumhari videos ki wajah sa paper bahut aacha hua
+
+                    </p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="flex items-center mb-6">
+                        <img src="https://cdn4.iconfinder.com/data/icons/professions-bzzricon-flat/512/25_Student-512.png" alt="Avatar" class="avatar">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800">Monalisa Kole</h4>
+                            <p class="text-blue-600">IT Student</p>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        Congratulations on reaching your first 1,000 subscribers, Om! Ur dedication for making math easier and more enjoyable is truly inspiring...we have literally seen ur hardwork with our eyes. Here's to many more milestones ahead and countless students learning from your amazing content....speciallyy in less time...Keep up the fantastic work yaarr!👍
+."
+                    </p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.7s;">
+                    <div class="flex items-center mb-6">
+                        <img src="data:image/jpeg;base64,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" alt="Student" class="w-16 h-16 rounded-full object-cover border-4 border-blue-100 hover:border-blue-300 transition-colors">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800">NANDAN KUMAR</h4>
+                            <p class="text-blue-600">CSE Student</p>
+                            <div class="flex text-yellow-400 mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        Right now I am in 1st year EE branch. Can you please guide me what should I focus on. Like future options and all. Or any
+
+                        advice? I just discovered your channel And guess what Your Complex Integration playlist
+                        
+                        saved me. Thank you so much. Please keep making the videos and Also I watched you krichhoff law video that video was so simple to understand.Finally found a channel where I can learn the stuffs too easily
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-blue-700 text-white parallax" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173');">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="absolute inset-0  z-0"></div>
+            <div class="relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-yellow-500 mb-6 animate-pulse">
+                    Ready to Transform Your Math Skills?
+                </h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto text-yellow-500">
+                    Join thousands of successful students who've made mathematics their strength with our proven teaching methodology.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button id="show-register-cta" class="bg-white text-blue-800 px-8 py-4 rounded-lg font-bold hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg glow text-lg z-10 btn-effect">
+                        <i class="fas fa-user-graduate mr-2"></i> Enroll Now
+                    </button>
+                    <a href="#" class="border-2 border-white text-black px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition-all transform hover:scale-105 glow text-lg z-10 btn-effect">
+                        <i class="fas fa-question-circle mr-2"></i> Have Questions?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <span class="bg-white text-blue-800 px-3 py-1 rounded-lg shadow-md text-2xl font-bold mr-3 glow hover:rotate-12 transition-transform">LTT</span>
+                        <span class="text-2xl font-bold">LESS TIME TUITION</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Making mathematics accessible and enjoyable for students of all levels through innovative teaching methods and comprehensive learning resources.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-blue-400 w-10 h-10 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Courses</a></li>
+                        <li><a href="notes.html" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Study Materials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">About Us</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Courses</h3>
+                    <ul class="space-y-3">
+                        <li><a href="am-1new.html" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Applied Mathematics I</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Applied Mathematics II</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Engineering Mathematics</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Advanced Calculus</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors hover-underline-animation">Differential Equations</a></li>
+                    </ul>
+                </div>
+                
+                <div id="contact">
+                    <h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-500"></i>
+                            <span>Near Amity university Noida, Sector 125 </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-blue-500"></i>
+                            <span>+91 78910 XXXXX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-blue-500"></i>
+                            <span>contact@lesstimetuition.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 Less Time Tuition. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors hover-underline-animation">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors hover-underline-animation">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors hover-underline-animation">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+   
+
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all opacity-0 invisible hover:bg-blue-700 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="fixed inset-0 bg-white/90 flex items-center justify-center z-50 transition-opacity duration-500">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+    </div>
+
+    <script>
+        // Initialize Alpine.js slider
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('slider', () => ({
+                currentSlide: 0,
+                slides: 3,
+                interval: null,
+                
+                init() {
+                    this.interval = setInterval(() => {
+                        this.nextSlide();
+                    }, 5000);
+                },
+                
+                nextSlide() {
+                    this.currentSlide = (this.currentSlide + 1) % this.slides;
+                    this.resetInterval();
+                },
+                
+                prevSlide() {
+                    this.currentSlide = (this.currentSlide - 1 + this.slides) % this.slides;
+                    this.resetInterval();
+                },
+                
+                resetInterval() {
+                    clearInterval(this.interval);
+                    this.interval = setInterval(() => {
+                        this.nextSlide();
+                    }, 5000);
+                }
+            }));
+        });
+
+        // Modal functionality
+        const loginModal = document.getElementById('login-modal');
+        const registerModal = document.getElementById('register-modal');
+        const showLoginBtn = document.getElementById('show-login-btn');
+        const showRegisterBtn = document.getElementById('show-register-btn');
+        const showLoginMobile = document.getElementById('mobile-show-login');
+        const showRegisterCta = document.getElementById('show-register-cta');
+        const closeLogin = document.getElementById('close-login');
+        const closeRegister = document.getElementById('close-register');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+
+        // Toggle password visibility
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Show login modal
+        [showLoginBtn, showLoginMobile].forEach(btn => {
+            btn?.addEventListener('click', () => {
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Show register modal
+        [showRegisterBtn, showRegisterCta].forEach(btn => {
+            btn?.addEventListener('click', () => {
+                registerModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modals
+        [closeLogin, closeRegister].forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.classList.remove('active');
+                registerModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Switch between login and register
+        showRegister.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+            registerModal.classList.add('active');
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerModal.classList.remove('active');
+            loginModal.classList.add('active');
+        });
+
+        // Close modals when clicking outside
+        [loginModal, registerModal].forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically handle the login logic
+            alert('Login functionality would be implemented here');
+            loginModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically handle the registration logic
+            alert('Registration functionality would be implemented here');
+            registerModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const backToTop = document.getElementById('back-to-top');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Show/hide back to top button
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.remove('opacity-100', 'visible');
+                backToTop.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        // Back to top button
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Dropdown functionality
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const button = dropdown.querySelector('button');
+            const content = dropdown.querySelector('.dropdown-content');
+            
+            button.addEventListener('click', () => {
+                content.classList.toggle('hidden');
+            });
+            
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('animate-fade-in-up');
+        });
+
+        // Mobile dropdown toggle
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            const content = document.getElementById('mobile-dropdown-content');
+            content.classList.toggle('hidden');
+            content.classList.toggle('animate-fade-in-up');
+        });
+
+        // Enhanced Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+            const duration = 2000;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / (duration / speed);
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, speed);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    
+                    if (entry.target.classList.contains('counter')) {
+                        animateCounters();
+                    }
+                    
+                    // Stop observing after animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-box, .course-card, .testimonial-card, .counter, [class*="animate-"]').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Page loading animation
+        window.addEventListener('load', function() {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.classList.add('opacity-0');
+            setTimeout(() => {
+                spinner.style.display = 'none';
+            }, 500);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Add hover effect to social icons
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.classList.add('animate__animated', 'animate__rubberBand');
+            });
+            
+            icon.addEventListener('animationend', function() {
+                this.classList.remove('animate__animated', 'animate__rubberBand');
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn-ripple').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+
+
+        // statusbar
+
+        // Function to animate numbers
+function animateCounter(counter) {
+    const target = +counter.getAttribute('data-target');
+    const increment = target / 200; // Adjust speed here
+    let count = 0;
+
+    function updateCounter() {
+        if (count < target) {
+            count += increment;
+            counter.innerText = Math.floor(count);
+            requestAnimationFrame(updateCounter);
+        } else {
+            counter.innerText = target;
+        }
+    }
+
+    updateCounter();
+}
+        // Observer to detect when the section is in view
+const counters = document.querySelectorAll('.counter');
+const statsSection = document.getElementById('stats');
+
+const obse = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Reset counters to 0 before animating
+            counters.forEach(counter => {
+                counter.innerText = '0';
+                animateCounter(counter);
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+obse.observe(statsSection);
+    </script>
+</body>
+</html>
